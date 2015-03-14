@@ -1,0 +1,3 @@
+# Skip checking #
+
+bdb/pdb do skip checking by using fnmatch. This has however the problem that it is very slow, but allows to specify patterns. I have deactivated pattern checking for now by replacing the pattern check with an equals check, because it massively slows down debugging, especially if you add multiple modules to skip. In pdb this isn't much of a problem because the check is only done rarely because files, which should be skipped usually don't have any breakpoints in it and therefore pdb doesn't trace these modules. However, epdb traces every file, which is not explicitely skipped and therefore there is a lot of overhead.
